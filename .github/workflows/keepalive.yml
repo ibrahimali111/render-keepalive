@@ -1,10 +1,10 @@
 name: Cloud Keep-Alive Cron
 
 on:
-  schedule:
-    # Run every 12 minutes (keeping Render 15-min free sleep at bay)
-    - cron: '*/12 * * * *'
   workflow_dispatch: # Allow manual trigger from GitHub web UI
+  # To enable automatic 24/7 pings, uncomment the schedule below after adding APP_URLS secret:
+  # schedule:
+  #   - cron: '*/12 * * * *'
 
 jobs:
   ping:

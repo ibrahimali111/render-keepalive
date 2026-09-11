@@ -137,9 +137,10 @@ def main():
     
     urls = get_target_urls()
     if not urls:
-        print(f"{RED}[!] Error: No target URLs found!{RESET}")
-        print(f"Set {YELLOW}APP_URLS{RESET} environment variable or create {YELLOW}urls.txt{RESET}.")
-        sys.exit(1)
+        print(f"{YELLOW}[*] Notice: No target URLs configured yet.{RESET}")
+        print("To monitor endpoints, add them to APP_URLS secret or urls.txt.")
+        print(f"{GREEN}[✓] KeepAlive is standing by gracefully.{RESET}\n")
+        sys.exit(0)
         
     print(f"Loaded {BOLD}{len(urls)}{RESET} endpoint(s) to ping:\n")
     
