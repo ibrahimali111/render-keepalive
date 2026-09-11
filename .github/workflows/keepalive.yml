@@ -1,0 +1,26 @@
+name: Cloud Keep-Alive Cron
+
+on:
+  schedule:
+    # Run every 12 minutes (keeping Render 15-min free sleep at bay)
+    - cron: '*/12 * * * *'
+  workflow_dispatch: # Allow manual trigger from GitHub web UI
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Ping Keep-Alive Endpoints
+        env:
+          APP_URLS: ${{ secrets.APP_URLS }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          python3 keepalive.py
